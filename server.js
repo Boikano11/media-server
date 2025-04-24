@@ -1,15 +1,7 @@
 const http = require('node:http')
 const express = require('express')
 const app = express()
-/*
-HTTP methods
 
-GET: retrieve data,
-POST: send data,
-DELETE: remove data,
-PUT/PATCH: update data
-
-*/
 
 const hostname = '127.0.0.1' //local host
 const port = 3001 //port
