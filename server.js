@@ -1,4 +1,5 @@
 const http = require('node:http')
+const fs = require('node:fs')
 const express = require('express')
 const app = express()
 
@@ -7,6 +8,7 @@ const hostname = '127.0.0.1' //local host
 const port = 3001 //port
 let movies = [
     {
+        id: 1,
         title:"Nickel Boys",
         initial_release: new Date("2024-8-30").toDateString(),
         director:"RaMell Ross",
@@ -17,6 +19,7 @@ let movies = [
         ],
     },
     {
+        id: 2,
         title:"G20",
         initial_release: new Date("2025-4-10").toDateString(),
         director:"Patricia Riggen",
@@ -27,6 +30,7 @@ let movies = [
         ],
     },
     {
+        id: 3,
         title:"The Gorge",
         initial_release: new Date("2025-2-14").toDateString(),
         director:"Scott Derrickson",
@@ -37,6 +41,7 @@ let movies = [
         ],
     }
 ]
+
 let series = [
     {
         title:"Dope Thief",
@@ -83,6 +88,7 @@ let series = [
         language: "English"
     }
 ]
+
 let songs = [
     {
         title: "Confession",
@@ -112,7 +118,15 @@ const server = http.createServer((req, res) => {
     if (req.method === 'GET' && req.url === '/movies'){
         res.statusCode = 200
         res.setHeader('content-type', 'application/json')
-        res.end(JSON.stringify({movies: movies}))
+        //create file
+        fs.open('moviesDB.json', 'wx', (err, data) => {
+            if (err) throw err
+            fs.writeFile(data, JSON.stringify(movies), err => {
+                if (err) throw err
+                res.end(JSON.stringify(movies))
+            })
+        })
+        
     }else if (req.method === 'GET' && req.url === '/series'){
         res.statusCode = 200
         res.setHeader('content-type', 'application/json')
