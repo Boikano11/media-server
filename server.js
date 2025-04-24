@@ -1,5 +1,6 @@
 const http = require('node:http')
-
+const express = require('express')
+const app = express()
 /*
 HTTP methods
 
@@ -134,8 +135,39 @@ const server = http.createServer((req, res) => {
         res.end()
     }
     
+    if (req.method === 'POST' && req.url === '/movies'){
+        
+    }
 })
 
 server.listen(port, hostname, ()=>{
     console.log('server running')
+})
+
+//movies
+app.get('/movies', (req, res) =>{
+    res.statusCode = 200
+    res.setHeader('content-type', 'application/json')
+    res.end(JSON.stringify({movies: movies}))
+})
+
+//series
+app.get('/series', (req, res) =>{
+    res.statusCode = 200
+    res.setHeader('content-type', 'application/json')
+    res.end(JSON.stringify({series: series}))
+})
+
+//songs
+app.get('/songs', (req, res) =>{
+    res.statusCode = 200
+    res.setHeader('content-type', 'application/json')
+    res.end(JSON.stringify({songs: songs}))
+})
+
+app.get('.', (req, res) => {
+    res.send("<h1>PAge Not Found.</h1>")
+})
+app.listen(3000, ()=>{
+    console.log("express")
 })
