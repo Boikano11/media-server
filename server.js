@@ -130,19 +130,27 @@ const server = http.createServer((req, res) => {
     }else if (req.method === 'GET' && req.url === '/series'){
         res.statusCode = 200
         res.setHeader('content-type', 'application/json')
-        res.end(JSON.stringify({series: series}))
+        fs.open('seriesDB.json', 'wx', (err, data) => {
+            if (err) throw err
+            fs.writeFile(data, JSON.stringify(series), err => {
+                if (err) throw err
+                res.end(JSON.stringify(series))
+            })
+        })
     }else if (req.method === 'GET' && req.url === '/songs'){
         res.statusCode = 200
         res.setHeader('content-type', 'application/json')
-        res.end(JSON.stringify({songs: songs}))
+        fs.open('songsDB.json', 'wx', (err, data) => {
+            if (err) throw err
+            fs.writeFile(data, JSON.stringify(songs), err => {
+                if (err) throw err
+                res.end(JSON.stringify(songs))
+            })
+        })
     }else{
         res.statusCode = 404
         res.setHeader('content-type', 'application/json')
         res.end()
-    }
-    
-    if (req.method === 'POST' && req.url === '/movies'){
-        
     }
 })
 
