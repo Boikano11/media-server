@@ -61,8 +61,8 @@ const server = http.createServer((req, res) => {
             }
         }else{
             res.statusCode = 404
-        res.setHeader('content-type', 'application/json')
-        res.end({"error": "No such directory."})
+            res.setHeader('content-type', 'application/json')
+            res.end({"error": "No such directory."})
         }
     }else if(req.method === 'POST'){
         if(req.url === '/movies'){
@@ -73,8 +73,8 @@ const server = http.createServer((req, res) => {
 
         }else{
             res.statusCode = 404
-        res.setHeader('content-type', 'application/json')
-        res.end({"error": "No such directory."})
+            res.setHeader('content-type', 'application/json')
+            res.end({"error": "No such directory."})
         }
     }else if(req.method === 'DELETE'){
         if(req.url === '/movies'){
@@ -85,8 +85,8 @@ const server = http.createServer((req, res) => {
 
         }else{
             res.statusCode = 404
-        res.setHeader('content-type', 'application/json')
-        res.end({"error": "No such directory."})
+            res.setHeader('content-type', 'application/json')
+            res.end({"error": "No such directory."})
         }
     }else if(req.method === 'PUT'){
         if(req.url === '/movies'){
@@ -97,8 +97,8 @@ const server = http.createServer((req, res) => {
 
         }else{
             res.statusCode = 404
-        res.setHeader('content-type', 'application/json')
-        res.end({"error": "No such directory."})
+            res.setHeader('content-type', 'application/json')
+            res.end({"error": "No such directory."})
         }
     }
 })
