@@ -62,7 +62,7 @@ const server = http.createServer((req, res) => {
         }else{
             res.statusCode = 404
             res.setHeader('content-type', 'application/json')
-            res.end({"error": "No such directory."})
+            res.end(JSON.stringify({"error": "No such directory."}))
         }
     }else if(req.method === 'POST'){
         if(req.url === '/movies'){
