@@ -66,15 +66,36 @@ const server = http.createServer((req, res) => {
         }
     }else if(req.method === 'POST'){
         if(req.url === '/movies'){
-
+            res.statusCode = 200
+            res.setHeader('content-type', 'application/json')
+            fileManager.insertData("movies").then((movies) =>{
+                res.end(JSON.stringify(movies))
+            }).catch((err) => {
+                res.statusCode = 500
+                res.end(JSON.stringify({"erorr": err}))
+            })
         }else if(req.url === '/series'){
-
-        }else if(req.url === 'songs'){
-
+            res.statusCode = 200
+            res.setHeader('content-type', 'application/json')
+            fileManager.insertData("series").then((series) =>{
+                res.end(JSON.stringify(series))
+            }).catch((err) => {
+                res.statusCode = 500
+                res.end(JSON.stringify({"erorr": err}))
+            })
+        }else if(req.url === '/songs'){
+            res.statusCode = 200
+            res.setHeader('content-type', 'application/json')
+            fileManager.insertData("songs").then((songs) =>{
+                res.end(JSON.stringify(songs))
+            }).catch((err) => {
+                res.statusCode = 500
+                res.end(JSON.stringify({"erorr": err}))
+            })
         }else{
             res.statusCode = 404
             res.setHeader('content-type', 'application/json')
-            res.end({"error": "No such directory."})
+            res.end(JSON.stringify({"error": "No such directory."}))
         }
     }else if(req.method === 'DELETE'){
         if(req.url === '/movies'){
