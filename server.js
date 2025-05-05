@@ -84,6 +84,49 @@ app.get('/songs', (req, res) =>{
     }
 })
 
+//POST
+app.post('/movies', (req, res) => {
+    if(fs.existsSync(FILE_NAME)){
+        fileManager.insertData("movies").then((movie) => {
+            res.statusCode = 200
+            res.setHeader('content-type', 'application/json')
+            res.end(JSON.stringify(movie))
+        }).catch(err => {
+            res.statusCode = 500
+            res.setHeader('content-type', 'application/json')
+            res.end(JSON.stringify({"error": "file not found"}))
+        })
+    }
+})
+
+app.post('/series', (req, res) => {
+    if(fs.existsSync(FILE_NAME)){
+        fileManager.insertData("series").then((series) => {
+            res.statusCode = 200
+            res.setHeader('content-type', 'application/json')
+            res.end(JSON.stringify(series))
+        }).catch(err => {
+            res.statusCode = 500
+            res.setHeader('content-type', 'application/json')
+            res.end(JSON.stringify({"error": "file not found"}))
+        })
+    }
+})
+
+app.post('/songs', (req, res) => {
+    if(fs.existsSync(FILE_NAME)){
+        fileManager.insertData("songs").then((songs) => {
+            res.statusCode = 200
+            res.setHeader('content-type', 'application/json')
+            res.end(JSON.stringify(songs))
+        }).catch(err => {
+            res.statusCode = 500
+            res.setHeader('content-type', 'application/json')
+            res.end(JSON.stringify({"error": "file not found"}))
+        })
+    }
+})
+
 //Unmatched routes
 app.use((req, res) => {
     res.statusCode = 404
