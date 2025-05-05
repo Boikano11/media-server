@@ -127,6 +127,43 @@ app.post('/songs', (req, res) => {
     }
 })
 
+//Delete route 
+app.delete('/movies', (req, res) =>{
+    fileManager.deleteData("movies").then(movie =>{
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(movie))  
+    }).catch(err =>{
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"error": err}))   
+    })
+})
+
+app.delete('/series', (req, res) =>{
+    fileManager.deleteData("series").then(series =>{
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(series))  
+    }).catch(err =>{
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"error": err}))   
+    })
+})
+
+app.delete('/songs', (req, res) =>{
+    fileManager.deleteData("songs").then(songs =>{
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(songs))  
+    }).catch(err =>{
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"error": err}))   
+    })
+})
+
 //Unmatched routes
 app.use((req, res) => {
     res.statusCode = 404
