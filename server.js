@@ -1,6 +1,7 @@
 const http = require('node:http')
 const express = require('express')
 const app = express()
+const fileManager = require('./file-manager')
 /*
 HTTP methods
 
@@ -122,7 +123,11 @@ let songs = [
 app.get('/movies', (req, res) =>{
     res.statusCode = 200
     res.setHeader('content-type', 'application/json')
-    res.end(JSON.stringify({movies: movies}))
+    fileManager.createFile()
+    fileManager.displayData("movies").then((movies) => res.end(JSON.stringify(movies))).catch(err){
+
+    }
+    
 })
 
 //series
