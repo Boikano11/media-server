@@ -86,45 +86,39 @@ app.get('/songs', (req, res) =>{
 
 //POST
 app.post('/movies', (req, res) => {
-    if(fs.existsSync(FILE_NAME)){
-        fileManager.insertData("movies").then((movie) => {
-            res.statusCode = 200
-            res.setHeader('content-type', 'application/json')
-            res.end(JSON.stringify(movie))
-        }).catch(err => {
-            res.statusCode = 500
-            res.setHeader('content-type', 'application/json')
-            res.end(JSON.stringify({"error": "file not found"}))
-        })
-    }
+    fileManager.insertData("movies").then((movie) => {
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(movie))
+    }).catch(err => {
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"error": "file not found"}))
+    })
 })
 
 app.post('/series', (req, res) => {
-    if(fs.existsSync(FILE_NAME)){
-        fileManager.insertData("series").then((series) => {
-            res.statusCode = 200
-            res.setHeader('content-type', 'application/json')
-            res.end(JSON.stringify(series))
-        }).catch(err => {
-            res.statusCode = 500
-            res.setHeader('content-type', 'application/json')
-            res.end(JSON.stringify({"error": "file not found"}))
-        })
-    }
+    fileManager.insertData("series").then((series) => {
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(series))
+    }).catch(err => {
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"error": "file not found"}))
+    })
 })
 
 app.post('/songs', (req, res) => {
-    if(fs.existsSync(FILE_NAME)){
-        fileManager.insertData("songs").then((songs) => {
-            res.statusCode = 200
-            res.setHeader('content-type', 'application/json')
-            res.end(JSON.stringify(songs))
-        }).catch(err => {
-            res.statusCode = 500
-            res.setHeader('content-type', 'application/json')
-            res.end(JSON.stringify({"error": "file not found"}))
-        })
-    }
+    fileManager.insertData("songs").then((songs) => {
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(songs))
+    }).catch(err => {
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"error": "file not found"}))
+    })    
 })
 
 //Delete route 
@@ -161,6 +155,44 @@ app.delete('/songs', (req, res) =>{
         res.statusCode = 500
         res.setHeader('content-type', 'application/json')
         res.end(JSON.stringify({"error": err}))   
+    })
+})
+
+//PUT
+
+app.put('/movies', (req, res) =>{
+    fileManager.updateData("movies").then(movies =>{
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(movies))
+    }).catch(err =>{
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"Error": err}))
+    })
+})
+
+app.put('/series', (req, res) =>{
+    fileManager.updateData("series").then(series =>{
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(series))
+    }).catch(err =>{
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"Error": err}))
+    })
+})
+
+app.put('/songs', (req, res) =>{
+    fileManager.updateData("songs").then(songs =>{
+        res.statusCode = 200
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify(songs))
+    }).catch(err =>{
+        res.statusCode = 500
+        res.setHeader('content-type', 'application/json')
+        res.end(JSON.stringify({"Error": err}))
     })
 })
 
