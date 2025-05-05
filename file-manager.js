@@ -206,6 +206,7 @@ exports.updateData = (category) => {
                         const movies = parsedData.movies
                         const movieId = 0
                         const updateMovie = movies.filter((item) => item.id === movieId)
+                        updateMovie[movieId].title = "hello"
                         resolve(updateMovie)
                     }catch(err){
                         reject(err)
@@ -213,14 +214,22 @@ exports.updateData = (category) => {
                 }else if(category === "series"){
                     try{
                         const parsedData = JSON.parse(data)
-                        
+                        const series = parsedData.series
+                        const seriesId = 0
+                        const updateSeries = series.filter((item) => item.id === seriesId)
+                        updateSeries[seriesId].directors[0] = 'company'
+                        resolve(updateSeries)
                     }catch(err){
                         reject(err)
                     }
                 }else if(category === "songs"){
                     try{
                         const parsedData = JSON.parse(data)
-                        
+                        const songs = parsedData.songs
+                        const songId = 0
+                        const updateSong = songs.filter((item) => item.id === songId)
+                        updateSong[songId].title = "hello"
+                        resolve(updateSong)
                     }catch(err){
                         reject(err)
                     }

@@ -146,9 +146,23 @@ const server = http.createServer((req, res) => {
                 res.end(JSON.stringify({"error": err}))
             })
         }else if(req.url === '/series'){
-
+            fileManager.updateData("series").then((series) =>{
+                res.statusCode = 200
+                res.setHeader('content-type', 'application/json')
+                res.end(JSON.stringify(series))
+            }).catch((err) =>{
+                res.statusCode = 500
+                res.end(JSON.stringify({"error": err}))
+            })
         }else if(req.url === '/songs'){
-
+            fileManager.updateData("songs").then((song) =>{
+                res.statusCode = 200
+                res.setHeader('content-type', 'application/json')
+                res.end(JSON.stringify(song))
+            }).catch((err) =>{
+                res.statusCode = 500
+                res.end(JSON.stringify({"error": err}))
+            })
         }else{
             res.statusCode = 404
             res.setHeader('content-type', 'application/json')
