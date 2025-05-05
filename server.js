@@ -24,11 +24,16 @@ const server = http.createServer((req, res) => {
                     res.statusCode = 500;
                     res.end(JSON.stringify({ error: 'Failed to read data' }));
                 });
-            }else{
-                fileManager.createFile()
-                fileManager.displayData("movies")
-                res.end()
-            }            
+                }else{
+                    fileManager.createFile()
+                    fileManager.displayData("movies").then((movies) => {
+                        res.end(JSON.stringify(movies));
+                    })
+                    .catch((err) => {
+                        res.statusCode = 500;
+                        res.end(JSON.stringify({ error: 'Failed to read data' }));
+                    });
+                }            
         }else if(req.url === '/series'){
             res.statusCode = 200
             res.setHeader('content-type', 'application/json')
@@ -99,27 +104,55 @@ const server = http.createServer((req, res) => {
         }
     }else if(req.method === 'DELETE'){
         if(req.url === '/movies'){
-
+            fileManager.deleteData("movies").then((movie) => {
+                res.statusCode = 200
+                res.setHeader('content-type', 'application/json')
+                res.end(JSON.stringify(movie))
+            }).catch((err) =>{
+                res.statusCode = 500
+                res.end(JSON.stringify({"erorr": err}))
+            })
         }else if(req.url === '/series'){
-
-        }else if(req.url === 'songs'){
-
+            fileManager.deleteData("series").then((serie) => {
+                res.statusCode = 200
+                res.setHeader('content-type', 'application/json')
+                res.end(JSON.stringify(serie))
+            }).catch((err) =>{
+                res.statusCode = 500
+                res.end(JSON.stringify({"erorr": err}))
+            })
+        }else if(req.url === '/songs'){
+            fileManager.deleteData("songs").then((song) => {
+                res.statusCode = 200
+                res.setHeader('content-type', 'application/json')
+                res.end(JSON.stringify(song))
+            }).catch((err) =>{
+                res.statusCode = 500
+                res.end(JSON.stringify({"erorr": err}))
+            })
         }else{
             res.statusCode = 404
             res.setHeader('content-type', 'application/json')
-            res.end({"error": "No such directory."})
+            res.end(JSON.stringify({"error": "No such directory."}))
         }
     }else if(req.method === 'PUT'){
-        if(req.url === '/movies'){
-
+        if(req.url === '/movies'){            
+            fileManager.updateData("movies").then((movie) =>{
+                res.statusCode = 200
+                res.setHeader('content-type', 'application/json')
+                res.end(JSON.stringify(movie))
+            }).catch((err) =>{
+                res.statusCode = 500
+                res.end(JSON.stringify({"error": err}))
+            })
         }else if(req.url === '/series'){
 
-        }else if(req.url === 'songs'){
+        }else if(req.url === '/songs'){
 
         }else{
             res.statusCode = 404
             res.setHeader('content-type', 'application/json')
-            res.end({"error": "No such directory."})
+            res.end(JSON.stringify({"error": "No such directory."}))
         }
     }
 })

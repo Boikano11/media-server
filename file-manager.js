@@ -112,10 +112,10 @@ exports.insertData = (category) =>{
         
                         const songsModel = {
                             "id": songData.length,
-                            "title": "Nkadimeng Milano",
+                            "title": "Nkadimeng Dieta",
                             "artist": "JustSam",
-                            "album": "Milano",
-                            "release": 2021
+                            "album": "Valliano",
+                            "release": 2025
                         }
         
                         songData.push(songsModel)
@@ -134,5 +134,98 @@ exports.insertData = (category) =>{
         })        
     }else{
         console.log(false)
+    }
+}
+
+exports.deleteData = (category) => {
+    if(fs.existsSync(FILE_NAME)){
+        return new Promise((resolve, reject) => {
+            fs.readFile(FILE_NAME, 'utf-8', (err, data) => {
+                if (err) throw err
+                
+                try{
+                    const parsedData = JSON.parse(data)
+                    if(category === "movies"){
+                       const movie = parsedData.movies
+                       const movieID = 1
+                       const result = movie.filter(item =>{
+                           return item.id !== movieID
+                       })
+                       parsedData.movies = result
+
+                       fs.writeFile(FILE_NAME, JSON.stringify(parsedData, null, 2), (err)=>{
+                            if(err) throw err
+                            console.log("data deleted.")
+                       })
+                       resolve(result) 
+                    }else if(category === "series"){
+                        const series = parsedData.series
+                        const seriesID = 1
+                        const result = series.filter(item =>{
+                            return item.id !== seriesID
+                        })
+                        parsedData.series = result
+ 
+                        fs.writeFile(FILE_NAME, JSON.stringify(parsedData, null, 2), (err)=>{
+                             if(err) throw err
+                             console.log("data deleted.")
+                        })
+                        resolve(result) 
+                     }else if(category === "songs"){
+                        const song = parsedData.songs
+                        const songID = 1
+                        const result = song.filter(item =>{
+                            return item.id !== songID
+                        })
+                        parsedData.songs = result
+ 
+                        fs.writeFile(FILE_NAME, JSON.stringify(parsedData, null, 2), (err)=>{
+                             if(err) throw err
+                             console.log("data deleted.")
+                        })
+                        resolve(result)  
+                     }
+                    
+                }catch(e){
+                    reject(e)
+                }
+            })
+        })
+    }
+}
+
+exports.updateData = (category) => {
+    if(fs.existsSync(FILE_NAME)){
+        return new Promise((resolve, reject) => {
+            fs.readFile(FILE_NAME, 'utf-8', (err, data) => {
+                if (err) throw err
+                
+                if (category === "movies"){
+                    try{
+                        const parsedData = JSON.parse(data)
+                        const movies = parsedData.movies
+                        const movieId = 0
+                        const updateMovie = movies.filter((item) => item.id === movieId)
+                        resolve(updateMovie)
+                    }catch(err){
+                        reject(err)
+                    }
+                }else if(category === "series"){
+                    try{
+                        const parsedData = JSON.parse(data)
+                        
+                    }catch(err){
+                        reject(err)
+                    }
+                }else if(category === "songs"){
+                    try{
+                        const parsedData = JSON.parse(data)
+                        
+                    }catch(err){
+                        reject(err)
+                    }
+                }
+            })
+        })
     }
 }

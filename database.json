@@ -9,16 +9,6 @@
         "them"
       ],
       "release": 1998
-    },
-    {
-      "id": 1,
-      "title": "Fast & Furious 5",
-      "directors": [
-        "Mr 1",
-        "Mr 2",
-        "Mr 4"
-      ],
-      "release": 2006
     }
   ],
   "series": [
@@ -32,17 +22,6 @@
       ],
       "seasons": 3,
       "initialRelease": 2015
-    },
-    {
-      "id": 1,
-      "title": "House",
-      "directors": [
-        "Me 1",
-        "You 2",
-        "US 5"
-      ],
-      "seasons": 6,
-      "initialRelease": 2005
     }
   ],
   "songs": [
@@ -54,11 +33,11 @@
       "release": 2021
     },
     {
-      "id": 1,
-      "title": "Nkadimeng Milano",
+      "id": 2,
+      "title": "Nkadimeng Dieta",
       "artist": "JustSam",
-      "album": "Milano",
-      "release": 2021
+      "album": "Valliano",
+      "release": 2025
     }
   ]
 }
