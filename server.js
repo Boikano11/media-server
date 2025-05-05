@@ -1,4 +1,5 @@
 const http = require('node:http')
+const fs = require('node:fs')
 const express = require('express')
 const app = express()
 const fileManager = require('./file-manager')
