@@ -121,13 +121,17 @@ let songs = [
 
 //movies
 app.get('/movies', (req, res) =>{
-    res.setHeader('content-type', 'application/json')
     fileManager.createFile()
-    fileManager.displayData("movies").then((movies) => {
-        res.end(JSON.stringify(movies))
-    }).catch(err => {
-        res.end(JSON.stringify({ "error": err }));
-    })
+    res.setHeader('content-type', 'application/json')
+    res.end({success: "success"})
+    // fileManager.displayData("movies").then((movies) => {
+    //     res.statusCode = 200
+    //     res.setHeader('content-type', 'application/json')
+    //     res.end(JSON.stringify(movies))
+    // }).catch(err => {
+    //     res.statusCode = 500
+    //     res.end(JSON.stringify({ "error": err }));
+    // })
     
 })
 
